@@ -1,0 +1,40 @@
+afin de détecter les services actifs et évaluer la sécurité.
+
+Étapes de l'expérience avec Nmap (Zenmap)
+Récupération de mon adresse IP dans le réseau local avec la commande ipconfig (CMD).
+
+Ouverture de l'application graphique de Nmap : Zenmap. Dans le champ Target, j'ai renseigné l'adresse réseau à laquelle j'appartenais : 192.168.100.0/24.
+
+Automatiquement, Nmap scanne toutes les adresses possibles (256 adresses), identifie les ports ouverts et fermés, ainsi que d'autres informations.
+
+J'ai ensuite ouvert un CMD et renseigné la commande :
+
+bash
+nmap -sn 192.168.100.0/24
+On obtient la liste de tous les appareils connectés au réseau.
+
+Puis avec la commande :
+
+bash
+nmap -sV -O 192.168.100.10
+(en spécifiant une adresse présente dans la liste précédente), cette commande rapporte tous les ports ouverts, fermés ou filtrés de cet appareil.
+
+Étapes de l'expérience avec Wireshark
+J'ai ouvert l'application, puis j'ai choisi l'interface à laquelle j'ai accès à Internet.
+
+La capture démarre automatiquement.
+
+Je lance en parallèle une recherche dans le navigateur.
+
+Après cela, j'arrête la capture.
+
+On obtient une énorme liste de toutes les entrées et sorties de données. Pour exploiter cette grande quantité de données, on peut les filtrer grâce à des commandes. Par exemple, pour n'avoir que les requêtes HTTPS :
+
+tcp.port == 443
+Ou pour trouver les paquets avec une adresse source spécifique :
+
+ip.src == 192.168.100.32
+Et si on veut combiner les deux, on ajoute && entre ces deux commandes.
+
+Conclusion
+Cela paraît minime, mais ces premiers pas marquent probablement le début d'une grande série de projets de plus en plus grands.
